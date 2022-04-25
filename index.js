@@ -1,44 +1,45 @@
 var fs = require('fs');
 
-var ifSentences = 0;
-var elseSentences = 0;
-var switchSentences = 0;
-var whileSentences = 0;
-
 try {
     var data = fs.readFileSync('code.txt', 'utf-8');
+
+    console.log(data)
     
-    var texto = data.toString().split('\n');
 
     const regexIf = /if/g;
     const regexSwitch  = /switch/g;
     const regexWhile = /while/g;
 
     
-    console.log(texto);
+    let foundIf = data.match(regexIf);
+    let foundSwitch = data.match(regexSwitch);
+    let foundWhile = data.match(regexWhile);
 
-    for (let index = 0; index < texto.length; index++) {
-        
-        if(regexIf.test(texto) )
-        {
-            ifSentences = ifSentences + 1 ;
-        }
-        else if(regexSwitch.test(texto))
-        {
-            switchSentences = switchSentences + 1;
-        }
-        else if(regexWhile.test(texto))
-        {
-            whileSentences = whileSentences + 1;
-        }
 
+    if(foundIf != null)
+    {
+        console.log(`Hay un total de ${foundIf.length} if en el código`);
+    }
+    else{
+        console.log('No se encontraron if en el código');
     }
 
-   console.log(`Las veces que se encontro el condicional "if" fue de  ${ifSentences}`);
-   console.log(`Las veces que se encontro el condicional "switch" fue de  ${switchSentences}`);
-   console.log(`Las veces que se encontro el condicional "while" fue de  ${whileSentences}`);
+    if(foundSwitch != null)
+    {
+        console.log(`Hay un total de ${foundSwitch.length} switch en el código`);
+    }
+    else{
+        console.log('No se encontraron switch en el código');
+    }
+    
+    if(foundWhile != null)
+    {
+        console.log(`Hay un total de ${foundWhile.length} while en el código`);
+    }
+    else{
+        console.log('No se encontraron while en el código');
+    }
 
- 
 } catch (error) {
     console.log('Error:', error.stack);
 }
